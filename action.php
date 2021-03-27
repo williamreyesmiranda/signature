@@ -12,7 +12,7 @@ if(isset($_POST['action'])){
 			$query=mysqli_query($con,$sql);
 			while( $row=mysqli_fetch_array($query) ) 
 			{ 
-				$output["ID"] = $row[1];
+				$output["ID"] = $row[0];
 				$output["Name"] = $row[1];
 				$output["Signature"] = $row[2];
 			}
@@ -46,7 +46,7 @@ if(isset($_POST['action'])){
 				if(!empty($query))
 				{
 				
-				 	$output["msg"] = "Succesfully Save as JSON";
+				 	$output["msg"] = "Elemento Guardado";
 				    
 				}
 			
