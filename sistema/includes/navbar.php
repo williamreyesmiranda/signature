@@ -52,7 +52,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="listaEntregas.php" class="nav-link">
                         <i class="fas fa-table"></i>
                         <p> Entregas</p>
                     </a>

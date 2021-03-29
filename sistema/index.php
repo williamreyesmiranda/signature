@@ -11,32 +11,22 @@ $usuario = $_SESSION['iduser'];
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INICIO</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
-  
-  <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
-  <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap.css">
-  <!-- SweetAlert -->
-  <link href="../plugins/sweetalert2/sweetalert2.css" rel="stylesheet">
+  <?php include "includes/scriptsUp.php" ?>
 </head>
 <style>
-
+  .kbw-signature {
+    width: 400px;
+    height: 100px;
+  }
 </style>
+
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
@@ -52,7 +42,7 @@ $usuario = $_SESSION['iduser'];
           <!-- inicio de cuerpo de trabajo -->
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Entrega Conformidad</h1>
+              <h1 class="m-0">Formulario</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -69,7 +59,7 @@ $usuario = $_SESSION['iduser'];
         <!-- inicio cuerpo de trabajo -->
         <div class="container-fluid">
 
-          <div class=" mx-auto d-block border border-dark rounded col-md-9 mb-4">
+          <div class=" mx-auto d-block border border-dark rounded col-md-12 mb-4">
             <h2 class="mx-auto d-block mt-2 p-1 text-center">Registro de Entregas de Satisfacción</h2>
             <form action="" id="formIngresoEntrega" class="needs-validation mt-4 p-2 " method="POST" novalidate>
               <div class="form-row">
@@ -86,7 +76,7 @@ $usuario = $_SESSION['iduser'];
                       <option value="<?php echo ($empresa['id_empresa']) ?>"><?php echo ($empresa['nombre_empresa']) ?></option>
                     <?php endforeach; ?>
                   </select>
-                  <div class="invalid-feedback">Ingrese La empresa</div>
+                  <div class="invalid-feedback">Ingrese la empresa</div>
                 </div>
                 <div class="form-group col-md-6">
                   <label>Nit: </label>
@@ -95,10 +85,10 @@ $usuario = $_SESSION['iduser'];
 
                 <div class="form-group col-md-6">
 
-                  <label for="empleado">Empleado (*):</label>
+                  <label for="empleado">Persona que recibe (*):</label>
                   <select class="form-control select2" name="empleado" id="empleado" required>
                   </select>
-                  <div class="invalid-feedback">Ingrese El empleado</div>
+                  <div class="invalid-feedback">Ingrese el nombre de la persona</div>
                 </div>
                 <div class="form-group col-md-6">
                   <label>Cargo : </label>
@@ -109,38 +99,42 @@ $usuario = $_SESSION['iduser'];
                     <a type="button" title="Agregar Filas" class="mr-2 font-weight-bold" onclick="agregarFila()"><i class="fas fa-plus-circle text-white"></i></a>
                     <a type="button" title="Eliminar Filas" class="font-weight-bold" onclick="eliminarFila()"><i class="fas fa-minus-circle text-white"></i></a>
                   </div>
-                  
-                    <table class="table table-striped table-dark rounded" id="tablaeditarprueba">
-                      <thead>
-                        <tr>
-                          <th scope="col" width="80px">N°</th>
-                          <th scope="col" width="100px">Cant (*)</th>
-                          <th scope="col">Descripción (*)</th>
-                          <th scope="col" width="25%">Marca</th>
-                          <th scope="col" width="20%">Serial</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td scope="row">1</td>
-                          <td><input type="number" name="cantidad[]" class="form-control" value="" required></td>
-                          <td><input type="text" name="descripcion[]" class="form-control" required></td>
-                          <td><input type="number" name="marca[]" class="form-control"></td>
-                          <td><input type="number" name="serial[]" class="form-control"></td>
-                        </tr>
 
-                      </tbody>
-                    </table>
-                 
+                  <table class="table table-striped table-dark rounded" id="tablaeditarprueba" width="100%" cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th scope="col" width="80px">N°</th>
+                        <th scope="col" width="100px">Cant (*)</th>
+                        <th scope="col">Descripción (*)</th>
+                        <th scope="col" width="25%">Marca</th>
+                        <th scope="col" width="20%">Serial</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">1</td>
+                        <td><input type="number" id="cantidad" name="cantidad[]" class="form-control" required></td>
+                        <td><input type="text" id="descripcion" name="descripcion[]" class="form-control" required></td>
+                        <td><input type="text" name="marca[]" class="form-control"></td>
+                        <td><input type="text" name="serial[]" class="form-control"></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+
                 </div>
                 <!-- /.card-header -->
-            <div class="form-group col-md-12">
-            <label for="obs">Observaciones:</label>
-              <textarea id="obs" name="obs" class="form-control"></textarea>
-            </div>
+                <div class="form-group col-md-12">
+                  <label for="obs">Observaciones:</label>
+                  <textarea id="obs" name="obs" class="form-control"></textarea>
+                </div>
+                <div class="col-12 text-center">
+                  <div id="firma"></div>
+                </div>
+                <div class="col-12 text-center"> <button type="button" class="btn btn-primary" id="limpiar">Limpiar Firma</button></div>
 
 
-                <button type="submit" class="btn btn-dark mb-5 mt-3 d-block mx-auto" name="botonRegistro" id="botonRegistro" onclick="registrarEntrega()">Registrar Entrega</button>
+                <button type="submit" class="btn btn-dark mb-5 mt-3 d-block mx-auto" name="botonRegistro" id="botonRegistro">Registrar Entrega</button>
             </form>
           </div>
 
@@ -153,48 +147,20 @@ $usuario = $_SESSION['iduser'];
 
 
     <!-- Main Footer -->
-    <?php include "includes/footer.php" ?>
+    <?php /* include "includes/footer.php"  */ ?>
 
   </div>
   <!-- fin wrapper -->
-
-  <!-- REQUIRED SCRIPTS -->
-  <!-- jQuery -->
-  <script src="../plugins/jquery/jquery.min.js"></script>
-
-  <!-- Bootstrap -->
-  <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- overlayScrollbars -->
-  <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../dist/js/adminlte.js"></script>
-
-  <!-- PAGE PLUGINS -->
-  <!-- jQuery Mapael -->
-  <script src="../plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-  <script src="../plugins/raphael/raphael.min.js"></script>
-  <script src="../plugins/jquery-mapael/jquery.mapael.min.js"></script>
-  <script src="../plugins/jquery-mapael/maps/usa_states.min.js"></script>
-  <!-- ChartJS -->
-  <script src="../plugins/chart.js/Chart.min.js"></script>
-
-  <!-- AdminLTE for demo purposes -->
-  <script src="../dist/js/demo.js"></script>
-  <!-- Summernote -->
-<script src="../plugins/summernote/summernote-bs4.min.js"></script>
-  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <!-- Select2 -->
-  <script src="../plugins/select2/js/select2.full.min.js"></script>
-  <script src="../plugins/sweetalert2/sweetalert2.js"></script>
-  <script src="js/scritpss.js"></script>
+  <?php include "includes/scriptsDown.php" ?>
 
   <script>
-  $(function () {
-    // Summernote
-    $('#obs').summernote({
-      placeholder: 'Digite su Observación',
-    }); })
-</script>
+    $(function() {
+      // Summernote
+      $('#obs').summernote({
+        placeholder: 'Digite su Observación',
+      });
+    })
+  </script>
   <script>
     function agregarFila() {
       var table = document.getElementById("tablaeditarprueba");
@@ -213,10 +179,9 @@ $usuario = $_SESSION['iduser'];
                         <td scope="row">` + rowCount + `</td>
                         <td ><input type="number" name="cantidad[]" class="form-control" required></td>
                         <td><input type="text" name="descripcion[]" class="form-control" required></td>
-                        <td><input type="number" name="marca[]" class="form-control"></td>
-                        <td><input type="number" name="serial[]" class="form-control"></td>
+                        <td><input type="text" name="marca[]" class="form-control"></td>
+                        <td><input type="text" name="serial[]" class="form-control"></td>
                       </tr>`;
-
       }
 
     }
@@ -239,6 +204,78 @@ $usuario = $_SESSION['iduser'];
         table.deleteRow(rowCount - 1);
       }
     }
+  </script>
+
+  <script>
+    $(function() {
+      let signatureContainer = $('#firma').signature();
+
+      $('#limpiar').click(function() {
+        signatureContainer.signature('clear');
+      });
+
+      signatureContainer.signature({
+        color: '#000'
+      });
+
+      $(document).on('submit', '#formIngresoEntrega', function() {
+        
+        let formData = new FormData(this);
+        let empresa = $.trim($('#empresa').val());
+        let empleado = $.trim($('#empleado').val());
+        let cantidad = $.trim($('#cantidad').val());
+        let descripcion = $.trim($('#descripcion').val());
+
+        if (empresa.length == "" || empleado.length == "" || cantidad.length == "" || descripcion.length == "") {
+          Swal.fire({
+            position: 'center',
+            icon: 'info',
+            html: '<img src="../img/expertosip-logo.svg">',
+            title: '<br>Hay campos obligatorios vacíos',
+            background: ' #000000cd',
+            showConfirmButton: false,
+            timer: 2000,
+
+          });
+        } else if (signatureContainer.signature('isEmpty')) {
+
+          Swal.fire({
+            position: 'center',
+            html: '<br><img src="../img/expertosip-logo.svg">',
+            title: '<br>No se ha generado la firma',
+            background: ' #000000cd',
+            showConfirmButton: false,
+            timer: 2000,
+          });
+
+        } else {
+          formData.append("signature", signatureContainer.signature('toJSON'));
+
+          $.ajax({
+            url: "php/ingresarEntrega.php",
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function(data) {
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                html: '<img src="../img/expertosip-logo.svg">',
+                title: '<br>Entrega de Satisfacción Registrada Corectamente',
+                background: ' #000000cd',
+                showConfirmButton: false,
+                timer: 2000,
+              })
+            }
+          });
+        }
+      });
+
+
+
+    });
   </script>
 </body>
 

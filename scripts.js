@@ -1,7 +1,7 @@
 $('#formLogin').submit(function (e) {
     e.preventDefault();
-    var usuario = $.trim($('#usuario').val());
-    var password = $.trim($('#contraseña').val());
+    let usuario = $.trim($('#usuario').val());
+    let password = $.trim($('#contraseña').val());
     if (usuario.length == "" || password == "") {
         Swal.fire({
             position: 'center',

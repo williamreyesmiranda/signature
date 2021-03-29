@@ -23,14 +23,6 @@
 
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-        <!-- Favicons -->
-        <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/../assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-        <link rel="icon" href="https://getbootstrap.com/docs/4.4/../assets/img/favicons/apple-touch-icon.png" sizes="32x32" type="image/png">
-        <link rel="icon" href="https://getbootstrap.com/docs/4.4/../assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-        <link rel="mask-icon" href="https://getbootstrap.com/docs/4.4/../assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-        <link rel="icon" href="https://getbootstrap.com/docs/4.4/../assets/img/favicons/safari-pinned-tab.svg">
-        <meta name="msapplication-config" content="https://getbootstrap.com/docs/4.4/../assets/img/favicons/browserconfig.xml">
-        <meta name="theme-color" content="#563d7c">
 
         <style>
             .kbw-signature {
@@ -56,11 +48,29 @@
                 <!-- Example row of columns -->
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Signature Canvas</h2>
+                        <br><br><br><br><br><br><br>
+                        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+      <h2>Signature Canvas</h2>
                         <div id="signatureContainer2"></div>
-                        <p style="clear: both;" class="btn btn-group">
-                            <button class="btn btn-outline-danger" id="clear">Clear</button>
-                            </p>
+                        <div style="clear: both;" class="btn btn-group">
+                            <button class="btn btn-outline-danger" id="clear">Borrar</button>
+                            </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+                       
                         <h2>Submit with Name</h2>
                         <form id="signatureForm">
                             <div class="form-group">
@@ -72,7 +82,7 @@
                     </div>
                     <div class="col-md-6 table-responsive">
                         <h2>Signature Table</h2>
-                        <table class="table table-bordered" id="signatureTable">
+                        <!-- <table class="table table-bordered" id="signatureTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -84,7 +94,7 @@
 
                             </tbody>
 
-                        </table>
+                        </table> -->
                     </div>
                 </div>
 
@@ -136,7 +146,7 @@
                 });
                
                 signatureContainer.signature({
-                    color: '#0080FF'
+                    color: '#000'
                 });
 
                 $(document).on('click', '#loadSignature', function() {
@@ -183,6 +193,7 @@
                     }
                     formData.append("action", "submit");
                     formData.append("signature", signatureContainer.signature('toJSON'));
+                    alert(formData);
                        $.ajax({
                         url: "action.php",
                         method: 'POST',
