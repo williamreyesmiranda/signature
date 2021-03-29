@@ -22,7 +22,7 @@ $usuario = $_SESSION['iduser'];
 </head>
 <style>
   .kbw-signature {
-    width: 400px;
+    width: 320px;
     height: 100px;
   }
 </style>
@@ -134,7 +134,7 @@ $usuario = $_SESSION['iduser'];
                 <div class="col-12 text-center"> <button type="button" class="btn btn-primary" id="limpiar">Limpiar Firma</button></div>
 
 
-                <button type="submit" class="btn btn-dark mb-5 mt-3 d-block mx-auto" name="botonRegistro" id="botonRegistro">Registrar Entrega</button>
+                <button type="submit" class="btn btn-dark mb-5 mt-3 d-block mx-auto" name="botonRegistro" id="botonRegistro" onclick="registrarEntrega()">Registrar Entrega</button>
             </form>
           </div>
 
@@ -219,25 +219,9 @@ $usuario = $_SESSION['iduser'];
       });
 
       $(document).on('submit', '#formIngresoEntrega', function() {
-        
+
         let formData = new FormData(this);
-        let empresa = $.trim($('#empresa').val());
-        let empleado = $.trim($('#empleado').val());
-        let cantidad = $.trim($('#cantidad').val());
-        let descripcion = $.trim($('#descripcion').val());
-
-        if (empresa.length == "" || empleado.length == "" || cantidad.length == "" || descripcion.length == "") {
-          Swal.fire({
-            position: 'center',
-            icon: 'info',
-            html: '<img src="../img/expertosip-logo.svg">',
-            title: '<br>Hay campos obligatorios vacíos',
-            background: ' #000000cd',
-            showConfirmButton: false,
-            timer: 2000,
-
-          });
-        } else if (signatureContainer.signature('isEmpty')) {
+        if (signatureContainer.signature('isEmpty')) {
 
           Swal.fire({
             position: 'center',
@@ -267,7 +251,9 @@ $usuario = $_SESSION['iduser'];
                 background: ' #000000cd',
                 showConfirmButton: false,
                 timer: 2000,
-              })
+              }).then((result) => {
+                        window.location = "";
+                    })
             }
           });
         }

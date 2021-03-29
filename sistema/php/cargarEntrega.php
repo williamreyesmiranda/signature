@@ -15,7 +15,7 @@ $entrega = $conexion->consultarDatos($consultaSQL);
 ?>
 <style>
     .kbw-signature {
-        width: 400px;
+        width: 320px;
         height: 100px;
     }
 </style>
@@ -82,36 +82,39 @@ $entrega = $conexion->consultarDatos($consultaSQL);
             <hr> <?php echo ($entrega[0]['observaciones']) ?>
         </div>
         <div class="row mt-3">
-            <div class="col-md-6 ">
+            <div class="col-md-6 text-center">
                 <div id="firma"></div>
                 <div><?php echo ($entrega[0]['nombre_empleado']) ?></div>
             </div>
-            <div class="col-md-6 ">
+            <div class="col-md-6 text-center">
                 <div id="firma2"></div>
-                <div><?php echo ($entrega[0]['nombre_usuario'])?></div>
+                <div><?php echo ($entrega[0]['nombre_usuario']) ?>(<?php echo ($entrega[0]['cargo_usuario']) ?>)</div>
             </div>
         </div>
-        
+
 
 
     </div>
+    <div class="card-footer">
+        <b>Nota:</b> Al formatear un equipo, EXPERTOSIP SAS <b>No se hace responsable</b>  
+        por la información que esté pro fuera de la ruta o carpetas que estén indicadas en esta hoja
+    </div>
+  
 
 </div>
 
 
 <script>
     $(function() {
+        /* firma de quien recibe */
         let signatureContainer = $('#firma').signature();
-        let signatureContainer2 = $('#firma2').signature({
-            disabled: true
-        });
         signatureContainer.signature({
             color: '#000'
         });
 
         var idEntrega = <?php echo ($idEntrega) ?>;
         $.ajax({
-            url: "php/cargarFirma.php",
+            url: "php/cargarFirmaEmpleado.php",
             method: 'POST',
             data: {
 
@@ -121,6 +124,31 @@ $entrega = $conexion->consultarDatos($consultaSQL);
             success: function(data) {
                 signatureContainer.signature('draw', data);
                 signatureContainer.signature({
+                    disabled: true
+                });
+            }
+        });
+
+
+        /* firma de trabajador expertos */
+
+        let signatureContainer2 = $('#firma2').signature();
+        signatureContainer2.signature({
+            color: '#000'
+        });
+
+        var idUsuario = <?php echo ($entrega[0]['id_usuario']) ?>;
+        $.ajax({
+            url: "php/cargarFirmaUsuario.php",
+            method: 'POST',
+            data: {
+
+                "idUsuario": idUsuario
+            },
+            dataType: 'json',
+            success: function(data) {
+                signatureContainer2.signature('draw', data);
+                signatureContainer2.signature({
                     disabled: true
                 });
             }

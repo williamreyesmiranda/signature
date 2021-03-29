@@ -68,7 +68,7 @@ $("#empleado").change(function () {
     });
 });
 
-/* function registrarEntrega(){
+function registrarEntrega(){
     let empresa = $.trim($('#empresa').val());
     let empleado = $.trim($('#empleado').val());
     let cantidad = $.trim($('#cantidad').val());
@@ -85,43 +85,9 @@ $("#empleado").change(function () {
             timer: 2000,
   
           });
-    }else{
-        $.ajax({
-           type: "POST",
-           url: "php/ingresarEntrega.php",
-           data: $('#formIngresoEntrega').serialize(),
-           dataType: "json",
-           success: function (data) {
-               console.log(data);
-              if(data==1){
-                Swal.fire({
-                    position: 'center',
-                    icon:'success',
-                    html: '<img src="../img/expertosip-logo.svg">',
-                    title: '<br>Entrega de Satisfacción Registrada Corectamente',
-                    background: ' #000000cd',
-                    showConfirmButton: false,
-                    timer: 2000,
-          }).then((result) => {
-            window.location = "";
-        });
-              }else{
-                Swal.fire({
-                    position: 'center',
-                    icon:'danger',
-                    html: '<img src="../img/expertosip-logo.svg">',
-                    title: '<br>Error al Registrar Entrega',
-                    background: ' #000000cd',
-                    showConfirmButton: false,
-                    timer: 2000,
-          
-                  });
-              }
-           }
-       });
     }
     
-} */
+}
 
 function cargarEntrega(d) {
 
