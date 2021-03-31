@@ -14,7 +14,7 @@ if(isset($_POST['action'])){
 			{ 
 				$output["ID"] = $row[0];
 				$output["Name"] = $row[1];
-				$output["Signature"] = $row[2];
+				$output["firma"] = $row[2];
 			}
 			
 
@@ -40,7 +40,8 @@ if(isset($_POST['action'])){
 				$person_Name = $_POST["signatureName"];
 				$person_Signature = $_POST["signature"];
 
-				$sql = "INSERT INTO `person` (`ID`, `Name`, `Signature`) VALUES (NULL, '$person_Name', '$person_Signature');";
+				$sql = "INSERT INTO `person` (`ID`, `Name`, `firma`) VALUES (NULL, '$person_Name', '$person_Signature');
+						";
 				$query=mysqli_query($con,$sql);
 
 				if(!empty($query))
@@ -49,6 +50,8 @@ if(isset($_POST['action'])){
 				 	$output["msg"] = "Elemento Guardado";
 				    
 				}
+				$sql = "UPDATE person SET firma=REPLACE(firma,'image/svg+xml,','')";
+				$query=mysqli_query($con,$sql);
 			
 			} 
 			catch (PDOException $e)
