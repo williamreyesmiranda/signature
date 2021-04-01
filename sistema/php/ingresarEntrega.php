@@ -24,7 +24,8 @@ if ($insert == 1) {
     $contar = 0;
 
     foreach ($cantidades as $cantidad) {
-        $consultaSQL = "INSERT INTO entregas_productos (entrega , cantidad, descripcion, marca, `serial`) VALUES ('$max','$cantidad','$descripcion[$contar]','$marca[$contar]','$serial[$contar]')";
+        $consultaSQL = "INSERT INTO entregas_productos (entrega , cantidad, descripcion, marca, `serial`) VALUES ('$max','$cantidad','$descripcion[$contar]','$marca[$contar]','$serial[$contar]');
+        UPDATE entregas SET firma_empleado=REPLACE(firma_empleado,'image/svg+xml,','')";
         $insert = $conexion->agregarDatos($consultaSQL);
         $contar++;
     }

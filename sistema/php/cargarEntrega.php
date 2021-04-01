@@ -13,12 +13,7 @@ INNER JOIN usuario us ON us.id_usuario=ent.usuario
  WHERE ent.id_entrega='$idEntrega'";
 $entrega = $conexion->consultarDatos($consultaSQL);
 ?>
-<style>
-    .kbw-signature {
-        width: 320px;
-        height: 100px;
-    }
-</style>
+
 <div class="card bg-white text-dark mt-5">
 
 
@@ -82,12 +77,12 @@ $entrega = $conexion->consultarDatos($consultaSQL);
             <hr> <?php echo ($entrega[0]['observaciones']) ?>
         </div>
         <div class="row mt-3">
-            <div class="col-md-6 text-center">
-                <div id="firma"></div>
+            <div class="col-md-6 text-center ">
+                <div ><span><?php echo ($entrega[0]['firma_empleado']) ?></span ></div>
                 <div><?php echo ($entrega[0]['nombre_empleado']) ?></div>
             </div>
             <div class="col-md-6 text-center">
-                <div id="firma2"></div>
+            <div ><span><?php echo ($entrega[0]['firma_usuario']) ?></span ></div>
                 <div><?php echo ($entrega[0]['nombre_usuario']) ?>(<?php echo ($entrega[0]['cargo_usuario']) ?>)</div>
             </div>
         </div>
@@ -104,9 +99,9 @@ $entrega = $conexion->consultarDatos($consultaSQL);
 </div>
 
 
-<script>
+<!-- <script>
     $(function() {
-        /* firma de quien recibe */
+        
         let signatureContainer = $('#firma').signature();
         signatureContainer.signature({
             color: '#000'
@@ -130,7 +125,7 @@ $entrega = $conexion->consultarDatos($consultaSQL);
         });
 
 
-        /* firma de trabajador expertos */
+       
 
         let signatureContainer2 = $('#firma2').signature();
         signatureContainer2.signature({
@@ -154,4 +149,4 @@ $entrega = $conexion->consultarDatos($consultaSQL);
             }
         });
     });
-</script>
+</script> -->

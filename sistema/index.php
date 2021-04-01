@@ -20,12 +20,7 @@ $usuario = $_SESSION['iduser'];
 
   <?php include "includes/scriptsUp.php" ?>
 </head>
-<style>
-  .kbw-signature {
-    width: 320px;
-    height: 100px;
-  }
-</style>
+
 
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -100,7 +95,7 @@ $usuario = $_SESSION['iduser'];
                     <a type="button" title="Eliminar Filas" class="font-weight-bold" onclick="eliminarFila()"><i class="fas fa-minus-circle text-white"></i></a>
                   </div>
 
-                  <table class="table table-striped table-dark rounded" id="tablaeditarprueba" width="100%" cellspacing="0">
+                  <table class="table table-striped table-dark rounded table-sm" id="tablaeditarprueba" width="1000px" cellspacing="0">
                     <thead>
                       <tr>
                         <th scope="col" width="80px">N°</th>
@@ -128,8 +123,8 @@ $usuario = $_SESSION['iduser'];
                   <label for="obs">Observaciones:</label>
                   <textarea id="obs" name="obs" class="form-control"></textarea>
                 </div>
-                <div class="col-12 text-center">
-                  <div id="firma"></div>
+                <div class="col-12 text-center ">
+                  <div id="firma" class="bg-white p-0"></div>
                 </div>
                 <div class="col-12 text-center"> <button type="button" class="btn btn-primary" id="limpiar">Limpiar Firma</button></div>
 
@@ -208,32 +203,18 @@ $usuario = $_SESSION['iduser'];
 
   <script>
     $(function() {
-      let signatureContainer = $('#firma').signature();
+      let signatureContainer = $('#firma').jSignature();
 
       $('#limpiar').click(function() {
-        signatureContainer.signature('clear');
+        signatureContainer.jSignature('reset');
       });
 
-      signatureContainer.signature({
-        color: '#000'
-      });
-
+     
       $(document).on('submit', '#formIngresoEntrega', function() {
 
         let formData = new FormData(this);
-        if (signatureContainer.signature('isEmpty')) {
-
-          Swal.fire({
-            position: 'center',
-            html: '<br><img src="../img/expertosip-logo.svg">',
-            title: '<br>No se ha generado la firma',
-            background: ' #000000cd',
-            showConfirmButton: false,
-            timer: 2000,
-          });
-
-        } else {
-          formData.append("signature", signatureContainer.signature('toJSON'));
+        
+          formData.append("signature", signatureContainer.jSignature("getData","svg"));
 
           $.ajax({
             url: "php/ingresarEntrega.php",
@@ -256,7 +237,7 @@ $usuario = $_SESSION['iduser'];
                     })
             }
           });
-        }
+        
       });
 
 

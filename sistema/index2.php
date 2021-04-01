@@ -70,7 +70,10 @@ $con = mysqli_connect('localhost', 'root', '', 'signature') or die("ERROR");
                     </div>
 
                     <h2>Submit with Name</h2>
+                    <div class="border rounded p-0">
                     <div id="signatureContainer2"></div>
+                    </div>
+                    
                     <div style="clear: both;" class="btn btn-group">
                                         <button class="btn btn-outline-danger" id="clear">Borrar</button>
                                     </div>
@@ -191,7 +194,6 @@ $con = mysqli_connect('localhost', 'root', '', 'signature') or die("ERROR");
                
                 formData.append("action", "submit");
                 formData.append("signature", signatureContainer.jSignature("getData","svg"));
-                alert(formData);
                 $.ajax({
                     url: "action.php",
                     method: 'POST',
