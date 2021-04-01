@@ -9,8 +9,10 @@ $user = (isset($_POST['usuario'])) ? $_POST['usuario'] : '';
 $pass = (isset($_POST['password'])) ? $_POST['password'] : '';
 
 //consulta SQL
-$consultaSQL = "SELECT id_usuario, nombre_usuario, usuario_sesion, correo_usuario, firma_usuario FROM usuario 
-WHERE usuario_sesion= '$user' AND clave= '$pass'";
+$consultaSQL = "SELECT us.id_usuario, us.nombre_usuario, us.usuario_sesion, us.correo_usuario, us.firma_usuario,
+rl.nombre_rol, rl.id_rol FROM usuario us 
+INNER JOIN rol rl ON rl.id_rol=us.rol
+WHERE us.usuario_sesion= '$user' AND us.clave= '$pass'";
 
 $data = $conectar->consultarDatos($consultaSQL);
 
@@ -21,6 +23,9 @@ if ($data) {
     $_SESSION['user'] = $data[0]['usuario_sesion'];
     $_SESSION['correo'] = $data[0]['correo_usuario'];
     $_SESSION['firma'] = $data[0]['firma_usuario'];
+    $_SESSION['rol'] = $data[0]['nombre_rol'];
+    $_SESSION['idrol'] = $data[0]['id_rol'];
+
 
 
     echo json_encode(1);

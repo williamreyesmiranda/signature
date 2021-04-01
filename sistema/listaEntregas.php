@@ -6,7 +6,7 @@ $conexion = new Conexion();
 if (empty($_SESSION['active'])) {
     header('location: ../');
 }
-$usuario = $_SESSION['iduser'];
+
 ?>
 
 

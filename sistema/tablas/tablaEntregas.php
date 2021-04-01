@@ -45,7 +45,7 @@ if (empty($_SESSION['active'])) {
             <tr class="text-center">
                 <td><?php echo ($entrega['id_entrega']); ?></td>
                 <td><?php echo ($entrega['nombre_empresa']); ?></td>
-                <td><?php echo ($entrega['nombre_empleado']); ?></td>
+                <td><?php echo ($entrega['nombre_empleado']." (".$entrega['cargo_empleado'].")"); ?></td>
                 <td><?php echo ($entrega['nombre_usuario']); ?></td>
                 <td><?php echo ($entrega['fecha_ingreso']); ?></td>
                 
@@ -79,7 +79,7 @@ if (empty($_SESSION['active'])) {
             ],
             responsive: true,
             "order": [
-                [0, "desc"]
+                [0, "asc"]
             ],
             "pageLength": 10,
             "language": {

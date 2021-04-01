@@ -50,14 +50,26 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+            <li class="nav-item">
+                    <a href="registroEntrega.php" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i>
+                        <p>Registrar Entrega</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="listaEntregas.php" class="nav-link">
                         <i class="fas fa-table"></i>
                         <p> Entregas</p>
                     </a>
                 </li>
-
+                <hr>
+                <li class="nav-header">ADMINISTRADOR</li>
+                <li class="nav-item">
+                    <a href="listaUsuarios.php" class="nav-link">
+                    <i class="fas fa-user-friends"></i>
+                        <p> Lista Usuarios</p>
+                    </a>
+                </li>
             </ul>
         </nav>
 
