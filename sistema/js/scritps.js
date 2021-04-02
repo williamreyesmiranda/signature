@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    /* SELECT2 */
+
     $('.select2').select2({
         theme: 'bootstrap4'
     });
@@ -62,6 +64,8 @@ $("#empleado").change(function () {
     });
 });
 
+/* ENTREGAS */
+
 function registrarEntrega() {
     let empresa = $.trim($('#empresa').val());
     let empleado = $.trim($('#empleado').val());
@@ -98,6 +102,8 @@ function cargarEntrega(d) {
 
 
 }
+
+/* USUARIOS */
 
 function formEditarusuario(datos) {
     d = datos.split('||');
@@ -181,3 +187,84 @@ function editarUsuario() {
     });
 }
 
+/* EMPRESAS */
+
+function registrarEmpresa() {
+    
+    $.ajax({
+        type: "POST",
+        url: "php/registrarEmpresa.php",
+        data: $('#registrarEmpresa').serialize(),
+        dataType: "json",
+        success: function (d) {
+            if (d == 1) {
+                $('#modalRegistrarEmpresa').modal('hide');
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Empresa Ingresada Correctamente',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then((result) => {
+                    window.location = "";
+                });
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Error al Intentar Ingresar Empresa',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            }
+        }
+    });
+}
+
+function formEditarEmpresa(datos){
+    d = datos.split('||');
+    $(".idEmpresa").val(d[0]);
+    $(".nombre").val(d[1]);
+    $(".nit").val(d[2]);
+    $(".estado").val(d[3]);
+    $('#modalEditarEmpresa').modal('show');
+}
+
+function editarEmpresa() {
+    $.ajax({
+        type: "POST",
+        url: "php/editarEmpresa.php",
+        data: $('#editarEmpresa').serialize(),
+        dataType: "json",
+        success: function (d) {
+            if (d == 1) {
+                $('#modalEditarEmpresa').modal('hide');
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Usuario Editado Correctamente',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then((result) => {
+                    window.location = "";
+                });
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Error al Intentar Editar Usuario',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            }
+        }
+    });
+}

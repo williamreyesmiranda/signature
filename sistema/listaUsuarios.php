@@ -16,7 +16,7 @@ if (empty($_SESSION['active'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista Entrega</title>
+    <title>Lista Usuarios</title>
 
     <?php include "includes/scriptsUp.php" ?>
 </head>
@@ -46,7 +46,7 @@ if (empty($_SESSION['active'])) {
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-                                <li class="breadcrumb-item active">Tabla Entrega</li>
+                                <li class="breadcrumb-item active">Tabla Usuarios</li>
 
                             </ol>
                         </div>
@@ -67,8 +67,6 @@ if (empty($_SESSION['active'])) {
             </section>
         </div>
         <!-- fin contenido-wrapper -->
-
-
         <!-- Main Footer -->
         <?php include "includes/footer.php" ?>
 
@@ -110,13 +108,13 @@ if (empty($_SESSION['active'])) {
                             </div>
                             <div class="form-group">
                                 <label for="clave">Clave:</label>
-                                <input type="text" name="clave" class="form-control clave">
+                                <input type="password" name="clave" class="form-control clave">
                             </div>
                             <div class="form-group">
                                 <label for="correo">Correo:</label>
                                 <input type="text" name="correo" class="form-control correo">
                             </div>
-                            
+
                         </form>
 
                     </div>
@@ -167,7 +165,7 @@ if (empty($_SESSION['active'])) {
                             </div>
                             <div class="form-group">
                                 <label for="clave">Clave:</label>
-                                <input type="text" name="clave" class="form-control clave">
+                                <input type="password" name="clave" class="form-control clave">
                             </div>
                             <div class="form-group">
                                 <label for="correo">Correo:</label>

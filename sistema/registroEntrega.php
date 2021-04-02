@@ -79,7 +79,7 @@ $usuario = $_SESSION['iduser'];
 
                                 <div class="form-group col-md-6">
                                     <?php
-                                    $consultaProcesos = "SELECT * FROM empresas WHERE activo=1";
+                                    $consultaProcesos = "SELECT * FROM empresas WHERE estado_empresa=1";
                                     $empresas = $conexion->consultarDatos($consultaProcesos);
                                     ?>
                                     <label for="empresa">Empresa (*):</label>
@@ -92,19 +92,23 @@ $usuario = $_SESSION['iduser'];
                                     <div class="invalid-feedback">Ingrese la empresa</div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Nit: </label>
+                                    <label>Nit: (Automático)</label>
                                     <input type="text" id="nit" class="form-control" disabled>
                                 </div>
 
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-5">
 
                                     <label for="empleado">Recibe (*):</label>
                                     <select class="form-control select2" name="empleado" id="empleado" required>
                                     </select>
                                     <div class="invalid-feedback">Ingrese el nombre de la persona</div>
                                 </div>
+                                <div class="form-group col-md-1">
+                                    <a href=""><i class="fas fa-user-plus"></i></a>
+
+                                </div>
                                 <div class="form-group col-md-6">
-                                    <label>Cargo : </label>
+                                    <label>Cargo : (Automático)</label>
                                     <input type="text" id="cargo" class="form-control" disabled>
                                 </div>
                                 <div class="col-sm-12 text-center">

@@ -70,6 +70,12 @@
                         <p> Lista Usuarios</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="listaEmpresas.php" class="nav-link">
+                    <i class="fas fa-building"></i>
+                        <p> Lista Empresas</p>
+                    </a>
+                </li>
             </ul>
         </nav>
 
