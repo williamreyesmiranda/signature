@@ -268,3 +268,87 @@ function editarEmpresa() {
         }
     });
 }
+
+/* EMPLEADOS */
+function registrarEmpleado() {
+    
+    $.ajax({
+        type: "POST",
+        url: "php/registrarEmpleado.php",
+        data: $('#registrarEmpleado').serialize(),
+        dataType: "json",
+        success: function (d) {
+            if (d == 1) {
+                $('#modalRegistrarEmpleado').modal('hide');
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Empleado Ingresado Correctamente',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then((result) => {
+                    window.location = "";
+                });
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Error al Intentar Ingresar Empleado',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            }
+        }
+    });
+}
+
+function formEditarEmpleado(datos){
+    d = datos.split('||');
+    $(".idEmpleado").val(d[0]);
+    $(".nombre").val(d[1]);
+    $(".empresa").val(d[2]);
+    $(".cargo").val(d[3]);
+    $(".correo").val(d[4]);
+    $(".estado").val(d[5]);
+    $('#modalEditarEmpleado').modal('show');
+}
+
+function editarEmpleado() {
+    $.ajax({
+        type: "POST",
+        url: "php/editarEmpleado.php",
+        data: $('#editarEmpleado').serialize(),
+        dataType: "json",
+        success: function (d) {
+            if (d == 1) {
+                $('#modalEditarEmpleado').modal('hide');
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Empleado Editado Correctamente',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then((result) => {
+                    window.location = "";
+                });
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    html: '<img src="../img/expertosip-logo.svg">',
+                    title: '<br>Error al Intentar Editar Empleado',
+                    background: ' #000000cd',
+                    showConfirmButton: false,
+                    timer: 2000,
+                })
+            }
+        }
+    });
+}
+

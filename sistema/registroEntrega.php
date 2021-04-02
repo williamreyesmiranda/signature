@@ -95,17 +95,14 @@ $usuario = $_SESSION['iduser'];
                                     <label>Nit: (Automático)</label>
                                     <input type="text" id="nit" class="form-control" disabled>
                                 </div>
-
-                                <div class="form-group col-md-5">
-
+                                <div class="form-group col-md-5 col-11">
                                     <label for="empleado">Recibe (*):</label>
                                     <select class="form-control select2" name="empleado" id="empleado" required>
                                     </select>
                                     <div class="invalid-feedback">Ingrese el nombre de la persona</div>
                                 </div>
-                                <div class="form-group col-md-1">
-                                    <a href=""><i class="fas fa-user-plus"></i></a>
-
+                                <div class="form-group col-1 text-center my-auto">
+                                    <a title="Agregar Empleado"><i class="fas fa-user-plus text-white" data-toggle="modal" data-target="#modalRegistrarEmpleado"></i></a>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Cargo : (Automático)</label>
@@ -116,7 +113,6 @@ $usuario = $_SESSION['iduser'];
                                         <a type="button" title="Agregar Filas" class="mr-2 font-weight-bold" onclick="agregarFila()"><i class="fas fa-plus-circle text-white"></i></a>
                                         <a type="button" title="Eliminar Filas" class="font-weight-bold" onclick="eliminarFila()"><i class="fas fa-minus-circle text-white"></i></a>
                                     </div>
-
                                     <table class="table table-striped table-dark rounded table-sm" id="tablaeditarprueba" width="1000px" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -135,51 +131,43 @@ $usuario = $_SESSION['iduser'];
                                                 <td><input type="text" name="marca[]" class="form-control"></td>
                                                 <td><input type="text" name="serial[]" class="form-control"></td>
                                             </tr>
-
                                         </tbody>
                                     </table>
-
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="form-group col-md-12">
                                     <label for="obs">Observaciones:</label>
                                     <textarea id="obs" name="obs" class="form-control"></textarea>
                                 </div>
-
-
                             </div>
-                            <div class="text-center ">
+                            <div class="text-center mx-auto">
                                 <div id="content" class="">
                                     <div id="signatureparent">
-
                                         <div id="firma"></div>
                                     </div>
-
                                 </div>
                             </div>
-
-
-                            <div class="mt-5">
-                                <button type="submit" class="btn btn-dark mt-5 mt-3 d-block mx-auto" name="botonRegistro" id="botonRegistro" onclick="registrarEntrega()">Registrar Entrega</button>
+                            <div class=" text-center mx-auto">
+                                <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro" onclick="registrarEntrega()">Registrar Entrega</button>
                             </div>
                         </form>
                     </div>
-
-
                 </div>
                 <!-- fin cuerpo de trabajo -->
             </section>
         </div>
         <!-- fin contenido-wrapper -->
-
-
         <!-- Main Footer -->
         <?php /* include "includes/footer.php"  */ ?>
 
     </div>
     <!-- fin wrapper -->
     <?php include "includes/scriptsDown.php" ?>
-
+    <script>
+        $(document).ready(function() {
+           
+});
+    </script>
     <script>
         $(function() {
             // Summernote
@@ -239,7 +227,9 @@ $usuario = $_SESSION['iduser'];
                 'UndoButton': true
             });
 
-
+            $("#clear").click(function() {
+                signatureContainer.jSignature("reset");
+            });
             $(document).on('submit', '#formIngresoEntrega', function() {
 
                 let formData = new FormData(this);
@@ -273,6 +263,8 @@ $usuario = $_SESSION['iduser'];
 
 
         });
+        
+
     </script>
 </body>
 

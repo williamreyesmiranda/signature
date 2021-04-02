@@ -60,8 +60,7 @@ if (empty($_SESSION['active'])) {
                 <div class="container-fluid">
 
                     <div class="mostrarTabla"></div>
-                    <div class="mostrarEntrega"></div>
-
+                    
                 </div>
                 <!-- fin cuerpo de trabajo -->
             </section>

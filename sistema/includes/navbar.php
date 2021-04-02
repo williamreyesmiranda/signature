@@ -1,9 +1,7 @@
 <!-- Preloader -->
-<!-- <div class="preloader flex-column justify-content-center align-items-center">
+<div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__wobble" src="../img/expertosip-logo.svg" alt="AdminLTELogo" width="300">
-</div> -->
-
-
+</div>
 
 <nav class="main-header navbar navbar-expand navbar-dark">
 
@@ -16,9 +14,9 @@
 
     <ul class="navbar-nav ml-auto ">
         <li class="nav-item my-auto" style="padding-left: 15px;">
-           
-                <?php echo ($_SESSION['nombre']) ?>
-           
+
+            <?php echo ($_SESSION['nombre']) ?>
+
 
         </li>
         <li class="nav-item">
@@ -34,25 +32,17 @@
     </ul>
 </nav>
 
-
-
-
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
     <a href="index.php" class="brand-link text-center">
         <img src="../img/expertosip-logo.svg" alt="AdminLTE Logo" class="brand-imageelevation-3" style="opacity: .8" height="30">
-
     </a>
-
-
     <div class="sidebar">
-
-
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
+                <li class="nav-item">
                     <a href="registroEntrega.php" class="nav-link">
-                    <i class="fas fa-sign-in-alt"></i>
+                        <i class="fas fa-sign-in-alt"></i>
                         <p>Registrar Entrega</p>
                     </a>
                 </li>
@@ -66,14 +56,20 @@
                 <li class="nav-header">ADMINISTRADOR</li>
                 <li class="nav-item">
                     <a href="listaUsuarios.php" class="nav-link">
-                    <i class="fas fa-user-friends"></i>
-                        <p> Lista Usuarios</p>
+                        <i class="fas fa-user-friends"></i>
+                        <p> Lista Usuarios (ExpertosIP)</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="listaEmpresas.php" class="nav-link">
-                    <i class="fas fa-building"></i>
+                        <i class="fas fa-building"></i>
                         <p> Lista Empresas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="listaEmpleados.php" class="nav-link">
+                        <i class="fas fa-user"></i>
+                        <p> Lista Empleados (Empresas)</p>
                     </a>
                 </li>
             </ul>
@@ -82,3 +78,56 @@
     </div>
 
 </aside>
+
+<!-- Modal Registrar Empleado-->
+<div class="modal fade" id="modalRegistrarEmpleado">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar Empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body col-md-12 d-block border border-dark rounded col-md-12 mb-4">
+                <form method="post" id="registrarEmpleado">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="nombre">Nombre Empleado:</label>
+                            <input type="text" name="nombre" class="form-control nombre">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <?php
+                            $consultaProcesos = "SELECT * FROM empresas WHERE estado_empresa=1";
+                            $empresas = $conexion->consultarDatos($consultaProcesos);
+                            ?>
+                            <label for="empresa">Empresa (*):</label>
+                            <select class="form-control" name="empresa" required>
+                                <option value="" selected disabled>Seleccione Una Empresa</option>
+                                <?php foreach ($empresas as $empresa) : ?>
+                                    <option value="<?php echo ($empresa['id_empresa']) ?>"><?php echo ($empresa['nombre_empresa']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div class="invalid-feedback">Ingrese la empresa</div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="cargo">Cargo:</label>
+                            <input type="text" name="cargo" class="form-control cargo">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="correo">Correo:</label>
+                            <input type="text" name="correo" class="form-control correo">
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="registrarEmpleado()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
