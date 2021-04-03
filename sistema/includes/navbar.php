@@ -1,7 +1,7 @@
 <!-- Preloader -->
-<div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="../img/expertosip-logo.svg" alt="AdminLTELogo" width="300">
-</div>
+<!-- <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="../img/expertosip-logo.svg" width="300">
+</div> -->
 
 <nav class="main-header navbar navbar-expand navbar-dark">
 
@@ -12,12 +12,9 @@
     </ul>
 
 
-    <ul class="navbar-nav ml-auto ">
+    <ul class="navbar-nav ml-auto">
         <li class="nav-item my-auto" style="padding-left: 15px;">
-
             <?php echo ($_SESSION['nombre']) ?>
-
-
         </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button" title="Pantalla Completa">
@@ -48,8 +45,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="listaEntregas.php" class="nav-link">
-                        <i class="fas fa-table"></i>
-                        <p> Entregas</p>
+                        <i class="far fa-calendar-check"></i>
+                        <p> Lista Entregas</p>
                     </a>
                 </li>
                 <hr>
@@ -94,7 +91,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="nombre">Nombre Empleado:</label>
-                            <input type="text" name="nombre" class="form-control nombre">
+                            <input type="text" name="nombre" class="form-control nombre" autocomplete="off">
                         </div>
                         <div class="form-group col-md-12">
                             <?php
@@ -112,11 +109,12 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="cargo">Cargo:</label>
-                            <input type="text" name="cargo" class="form-control cargo">
+                            <input type="text" name="cargo" class="form-control cargo" autocomplete="off">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="correo">Correo:</label>
-                            <input type="text" name="correo" class="form-control correo">
+                            <input type="email" name="correo" class="form-control correo" autocomplete="off">
+                            
                         </div>
 
                     </div>

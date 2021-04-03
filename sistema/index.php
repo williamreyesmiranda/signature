@@ -25,7 +25,7 @@ $usuario = $_SESSION['iduser'];
   #signatureparent {
     color: black;
     background-color: darkgrey;
-    /*max-width:600px;*/
+    max-width: 350px;
     padding: 10px;
     border-radius: 6px;
   }
@@ -71,7 +71,32 @@ $usuario = $_SESSION['iduser'];
       <section class="content">
         <!-- inicio cuerpo de trabajo -->
         <div class="container-fluid">
+          <?php
+          if ($_SESSION['firma'] == "" && $_SESSION['idrol']!=1) :
+          ?>
+            <form id="formIngresoEntrega">
+              <input type="hidden" name="idUsuario" value="<?php echo $_SESSION['iduser'] ?>">
+              <div class="text-center mx-auto">
+                <center>
 
+                  <button type="button" class="btn btn-info mb-3" id="clear">Limpiar Firma</button>
+                  <div id="content" class="">
+                    <div id="signatureparent">
+                      <div id="firma"></div>
+                    </div>
+                  </div>
+                </center>
+                <div class="justify-content-center">
+                  <div class="text-center">
+
+                    <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro" >Registrar Entrega</button>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+
+          <?php endif ?>
 
 
         </div>
@@ -89,5 +114,60 @@ $usuario = $_SESSION['iduser'];
   <?php include "includes/scriptsDown.php" ?>
 
 </body>
+<script>
+  comparativo = '<?php echo $_SESSION['firma'] ?>';
+  rol='<?php echo $_SESSION['idrol'] ?>'
+  if (comparativo == ''&& rol!=1) {
+    Swal.fire({
+      position: 'center',
+      icon: 'info',
+      html: '<img src="../img/expertosip-logo.svg">',
+      title: '<br>Registra tu Firma',
+
+    })
+  }
+
+</script>
+<script>
+  $(function() {
+    let signatureContainer = $('#firma').jSignature();
+
+    $("#clear").click(function() {
+      signatureContainer.jSignature("reset");
+    });
+    $(document).on('submit', '#formIngresoEntrega', function(e) {
+      e.preventDefault();
+      let formData = new FormData(this);
+
+      formData.append("signature", signatureContainer.jSignature("getData", "svg"));
+
+      $.ajax({
+        url: "php/actualizarFirmaUsuario.php",
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: function(data) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            html: '<img src="../img/expertosip-logo.svg">',
+            title: '<br>Tu Firma Se ha Registrado',
+
+            showConfirmButton: false,
+            timer: 2000,
+          }).then((result) => {
+            window.location = "";
+          })
+        }
+      });
+
+    });
+
+
+
+  });
+</script>
 
 </html>

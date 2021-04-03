@@ -141,17 +141,7 @@ if (empty($_SESSION['active'])) {
 
     <script>
         $(document).ready(function() {
-           
-
-            /* var de = {
-                content: [
-                    'First paragraph',
-                    'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
-                ]
-
-            }
-            
-            pdfMake.createPdf(de).open({}, window); */
+       
             $('.mostrarTabla').load('tablas/tablaEmpleados.php');
 
         });

@@ -25,7 +25,7 @@ $usuario = $_SESSION['iduser'];
     #signatureparent {
         color: black;
         background-color: darkgrey;
-        /*max-width:600px;*/
+        max-width:380px;
         padding: 10px;
         border-radius: 6px;
     }
@@ -79,7 +79,7 @@ $usuario = $_SESSION['iduser'];
 
                                 <div class="form-group col-md-6">
                                     <?php
-                                    $consultaProcesos = "SELECT * FROM empresas WHERE estado_empresa=1";
+                                    $consultaProcesos = "SELECT * FROM empresas WHERE estado_empresa=1 ORDER BY nombre_empresa";
                                     $empresas = $conexion->consultarDatos($consultaProcesos);
                                     ?>
                                     <label for="empresa">Empresa (*):</label>
@@ -91,9 +91,9 @@ $usuario = $_SESSION['iduser'];
                                     </select>
                                     <div class="invalid-feedback">Ingrese la empresa</div>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6" style="color:darkgray">
                                     <label>Nit: (Automático)</label>
-                                    <input type="text" id="nit" class="form-control" disabled>
+                                    <input type="text" id="nit" class="form-control" style="color:darkgray" disabled>
                                 </div>
                                 <div class="form-group col-md-5 col-11">
                                     <label for="empleado">Recibe (*):</label>
@@ -104,9 +104,9 @@ $usuario = $_SESSION['iduser'];
                                 <div class="form-group col-1 text-center my-auto">
                                     <a title="Agregar Empleado"><i class="fas fa-user-plus text-white" data-toggle="modal" data-target="#modalRegistrarEmpleado"></i></a>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6" style="color:darkgray">
                                     <label>Cargo : (Automático)</label>
-                                    <input type="text" id="cargo" class="form-control" disabled>
+                                    <input type="text" id="cargo" class="form-control" style="color:darkgray" disabled>
                                 </div>
                                 <div class="col-sm-12 text-center">
                                     <div class="form-group text-center">
@@ -141,15 +141,22 @@ $usuario = $_SESSION['iduser'];
                                 </div>
                             </div>
                             <div class="text-center mx-auto">
-                                <div id="content" class="">
-                                    <div id="signatureparent">
-                                        <div id="firma"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" text-center mx-auto">
-                                <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro" onclick="registrarEntrega()">Registrar Entrega</button>
-                            </div>
+                <center>
+
+                  <button type="button" class="btn btn-info mb-3" id="clear">Limpiar Firma</button>
+                  <div id="content" class="">
+                    <div id="signatureparent">
+                      <div id="firma"></div>
+                    </div>
+                  </div>
+                </center>
+                <div class="justify-content-center">
+                  <div class="text-center">
+
+                    <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro" >Registrar Entrega</button>
+                  </div>
+                </div>
+              </div>
                         </form>
                     </div>
                 </div>
@@ -223,9 +230,7 @@ $usuario = $_SESSION['iduser'];
 
     <script>
         $(function() {
-            let signatureContainer = $('#firma').jSignature({
-                'UndoButton': true
-            });
+            let signatureContainer = $('#firma').jSignature();
 
             $("#clear").click(function() {
                 signatureContainer.jSignature("reset");

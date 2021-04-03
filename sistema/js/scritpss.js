@@ -78,7 +78,7 @@ function registrarEntrega() {
             icon: 'info',
             html: '<img src="../img/expertosip-logo.svg">',
             title: '<br>Hay campos obligatorios vacíos',
-            background: ' #000000cd',
+
             showConfirmButton: false,
             timer: 2000,
 
@@ -131,19 +131,19 @@ function registrarUsuario() {
                     icon: 'success',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Usuario Ingresado Correctamente',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 }).then((result) => {
                     window.location = "";
                 });
-            }else{
+            } else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Error al Intentar Ingresar Usuario',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 })
@@ -166,19 +166,19 @@ function editarUsuario() {
                     icon: 'success',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Usuario Editado Correctamente',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 }).then((result) => {
                     window.location = "";
                 });
-            }else{
+            } else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Error al Intentar Editar Usuario',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 })
@@ -190,7 +190,7 @@ function editarUsuario() {
 /* EMPRESAS */
 
 function registrarEmpresa() {
-    
+
     $.ajax({
         type: "POST",
         url: "php/registrarEmpresa.php",
@@ -204,19 +204,19 @@ function registrarEmpresa() {
                     icon: 'success',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Empresa Ingresada Correctamente',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 }).then((result) => {
                     window.location = "";
                 });
-            }else{
+            } else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Error al Intentar Ingresar Empresa',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 })
@@ -225,7 +225,7 @@ function registrarEmpresa() {
     });
 }
 
-function formEditarEmpresa(datos){
+function formEditarEmpresa(datos) {
     d = datos.split('||');
     $(".idEmpresa").val(d[0]);
     $(".nombre").val(d[1]);
@@ -248,19 +248,19 @@ function editarEmpresa() {
                     icon: 'success',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Usuario Editado Correctamente',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 }).then((result) => {
                     window.location = "";
                 });
-            }else{
+            } else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Error al Intentar Editar Usuario',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 })
@@ -271,7 +271,7 @@ function editarEmpresa() {
 
 /* EMPLEADOS */
 function registrarEmpleado() {
-    
+
     $.ajax({
         type: "POST",
         url: "php/registrarEmpleado.php",
@@ -285,19 +285,18 @@ function registrarEmpleado() {
                     icon: 'success',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Empleado Ingresado Correctamente',
-                    background: ' #000000cd',
+
                     showConfirmButton: false,
                     timer: 2000,
                 }).then((result) => {
                     window.location = "";
                 });
-            }else{
+            } else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Error al Intentar Ingresar Empleado',
-                    background: ' #000000cd',
                     showConfirmButton: false,
                     timer: 2000,
                 })
@@ -306,7 +305,7 @@ function registrarEmpleado() {
     });
 }
 
-function formEditarEmpleado(datos){
+function formEditarEmpleado(datos) {
     d = datos.split('||');
     $(".idEmpleado").val(d[0]);
     $(".nombre").val(d[1]);
@@ -331,24 +330,78 @@ function editarEmpleado() {
                     icon: 'success',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Empleado Editado Correctamente',
-                    background: ' #000000cd',
                     showConfirmButton: false,
                     timer: 2000,
                 }).then((result) => {
                     window.location = "";
                 });
-            }else{
+            } else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
                     html: '<img src="../img/expertosip-logo.svg">',
                     title: '<br>Error al Intentar Editar Empleado',
-                    background: ' #000000cd',
                     showConfirmButton: false,
                     timer: 2000,
                 })
             }
         }
     });
+}
+
+function finalizarEntrega(datos) {
+    d = datos.split("||");
+    idEntrega = d[0];
+    estadoActual = d[1];
+    estadoNuevo = d[2];
+
+    if (estadoActual == 1 && estadoNuevo == 3) {
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            html: 'Comuníquese con el cliente para que apruebe la firma.<br><img src="../img/expertosip-logo.svg">',
+            title: '<br>La Firma no ha sido aprobada!!!',
+        });
+    } else {
+        if (estadoNuevo == 3) {
+            titulo = 'Finalizar';
+        } else {
+            titulo = 'Anular';
+        }
+        Swal.fire({
+            title: titulo + ' Entrega',
+            html: '<img src="../img/expertosip-logo.svg">',
+            showCancelButton: true,
+            confirmButtonText: titulo,
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+              let datos="idEntrega="+idEntrega+"&estado="+estadoNuevo;
+              $.ajax({
+                  type: "POST",
+                  url: "php/cambiarEstadoEntrega.php",
+                  data: datos,
+                  dataType: "json",
+                  success: function (datos) {
+                      if(datos==1){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            html: '<img src="../img/expertosip-logo.svg">',
+                            title: '<br>El estado ha sido Cambiado',
+                            showConfirmButton: false,
+                            timer: 2000,
+                        }).then((result) => {
+                            window.open("reporteEntrega.php?id="+idEntrega, "_blank")
+                        });
+                      }else{
+
+                      }
+                  }
+              });
+            }
+        })
+    }
+
 }
 
