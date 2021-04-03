@@ -50,7 +50,8 @@
                     </a>
                 </li>
                 <hr>
-                <li class="nav-header">ADMINISTRADOR</li>
+                <?php if($_SESSION['idrol']==1):?>
+                    <li class="nav-header">ADMINISTRADOR</li>
                 <li class="nav-item">
                     <a href="listaUsuarios.php" class="nav-link">
                         <i class="fas fa-user-friends"></i>
@@ -69,6 +70,8 @@
                         <p> Lista Empleados (Empresas)</p>
                     </a>
                 </li>
+                <?php endif?>
+                
             </ul>
         </nav>
 

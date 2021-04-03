@@ -55,7 +55,7 @@ $usuario = $_SESSION['iduser'];
           <!-- inicio de cuerpo de trabajo -->
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Inicio</h1>
+              <h1 class="m-0">Reporte General de Entregas</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -72,11 +72,11 @@ $usuario = $_SESSION['iduser'];
         <!-- inicio cuerpo de trabajo -->
         <div class="container-fluid">
           <?php
-          if ($_SESSION['firma'] == "" && $_SESSION['idrol']!=1) :
+          if ($_SESSION['firma'] == "" && $_SESSION['idrol'] != 1) :
           ?>
             <form id="formIngresoEntrega">
               <input type="hidden" name="idUsuario" value="<?php echo $_SESSION['iduser'] ?>">
-              <div class="text-center mx-auto">
+              <div class="text-center mx-auto mb-5">
                 <center>
 
                   <button type="button" class="btn btn-info mb-3" id="clear">Limpiar Firma</button>
@@ -89,7 +89,7 @@ $usuario = $_SESSION['iduser'];
                 <div class="justify-content-center">
                   <div class="text-center">
 
-                    <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro" >Registrar Entrega</button>
+                    <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro">Registrar Entrega</button>
                   </div>
                 </div>
               </div>
@@ -98,7 +98,262 @@ $usuario = $_SESSION['iduser'];
 
           <?php endif ?>
 
+          <!-- Boxing de  reportes-->
+          <div class="row">
+            <!-- card total entregas -->
+            <div class="col-12 col-sm-6 col-md-3">
 
+              <div class="info-box">
+                <?php
+                $consultaSQL = "SELECT count(id_entrega) FROM entregas WHERE estado_entrega<=2";
+                $result = $conexion->consultarDatos($consultaSQL);
+
+                ?>
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-clipboard-list"></i></i></span>
+                <a class="text-white" data-toggle="collapse" href="#totalEntregas" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <div class="info-box-content ">
+                    <?php
+                    $consultaSQL = "SELECT count(id_entrega)  as 'contar' FROM entregas WHERE estado_entrega<=2";
+                    $result = $conexion->consultarDatos($consultaSQL);
+
+                    ?>
+                    <span class="info-box-number">Total Entregas: <?php echo $result[0]['contar']; ?></span>
+                    <span class="info-box-text">
+                      Ver Detalle <i class="fas fa-angle-right"></i>
+                    </span>
+                  </div>
+                </a>
+
+              </div>
+
+            </div>
+            <!-- card total pendientes -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-question-circle"></i></span>
+                <a class="text-white" data-toggle="collapse" href="#totalPendientes" role="button" aria-expanded="false" aria-controls="totalPendiente">
+                  <div class="info-box-content ">
+                    <?php
+                    $consultaSQL = "SELECT count(id_entrega)  as 'contar' FROM entregas WHERE estado_entrega=1";
+                    $result = $conexion->consultarDatos($consultaSQL);
+
+                    ?>
+                    <span class="info-box-number">Entregas Pendientes: <?php echo $result[0]['contar']; ?></span>
+                    <span class="info-box-text">
+                      Ver Detalle <i class="fas fa-angle-right"></i>
+                    </span>
+                  </div>
+                </a>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="clearfix hidden-md-up"></div>
+            <!-- card total aprobados -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-check-circle"></i></span>
+
+                <a class="text-white" data-toggle="collapse" href="#totalAprobadas" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <div class="info-box-content ">
+                    <?php
+                    $consultaSQL = "SELECT count(id_entrega)  as 'contar' FROM entregas WHERE estado_entrega=2";
+                    $result = $conexion->consultarDatos($consultaSQL);
+
+                    ?>
+                    <span class="info-box-number">Entregas Aprobadas: <?php echo $result[0]['contar']; ?></span>
+                    <span class="info-box-text">
+                      Ver Detalle <i class="fas fa-angle-right"></i>
+                    </span>
+                  </div>
+                </a>
+
+              </div>
+
+            </div>
+            <!-- graficos -->
+            <div class="col-12 col-sm-6 col-md-3">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-chart-pie"></i></span>
+                <a class="text-white" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <div class="info-box-content ">
+
+                    <span class="info-box-number">Graficos</span>
+                    <span class="info-box-text">
+                      Ver Detalle <i class="fas fa-angle-right"></i>
+                    </span>
+                  </div>
+                </a>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+            </div>
+
+          </div>
+
+
+          <!-- acordeon de total entregas -->
+          <div class="collapse" id="totalEntregas">
+            <div class="card">
+              <div class="card-header text-center font-weight-bold p-0">
+                <h1>Total de Entregas</h1>
+              </div>
+              <div class="card-body">
+                <table class="table table-hover table-condensed table-bordered tablaDinamica" id="" width="100%" cellspacing="0">
+                  <thead>
+                    <tr class="text-center">
+                      <th>ID</th>
+                      <th>Empresa</th>
+                      <th>Recibió</th>
+                      <th>Entregó</th>
+                      <th>Fecha Registro</th>
+                      <th>Estado Firma</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <?php
+
+                    $consultaSQL = "SELECT * FROM entregas ent 
+                        INNER JOIN empresas empr ON empr.id_empresa=ent.empresa
+                        INNER JOIN empleados empl ON empl.id_empleado=ent.empleado
+                        INNER JOIN usuario us ON us.id_usuario=ent.usuario
+                        INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado WHERE ent.estado_entrega<=2 ORDER BY empr.nombre_empresa";
+                    $entregas = $conexion->consultarDatos($consultaSQL);
+                    foreach ($entregas as $entrega) :
+                      $datos = $entrega['id_entrega'] . "||" . $entrega['estado_entrega'] . "||";
+
+
+                    ?>
+                      <tr class="text-center">
+                        <td><?php echo ($entrega['id_entrega']); ?></td>
+                        <td><?php echo ($entrega['nombre_empresa']); ?></td>
+                        <td><?php echo ($entrega['nombre_empleado'] . " (" . $entrega['cargo_empleado'] . ")"); ?></td>
+                        <td><?php echo ($entrega['nombre_usuario']); ?></td>
+                        <td><?php echo ($entrega['fecha_ingreso']); ?></td>
+                        <td><?php echo ($entrega['nombre_estado']); ?></td>
+
+                      </tr>
+
+                    <?php
+
+                    endforeach;  ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+          <!-- acordeon de entregas pendientes -->
+          <div class="collapse" id="totalPendientes">
+            <div class="card">
+              <div class="card-header text-center font-weight-bold p-0">
+                <h1>Entregas Pendientes por Aprobación</h1>
+              </div>
+              <div class="card-body">
+                <table class="table table-hover table-condensed table-bordered tablaDinamica" id="" width="100%" cellspacing="0">
+                  <thead>
+                    <tr class="text-center">
+                      <th>ID</th>
+                      <th>Empresa</th>
+                      <th>Recibió</th>
+                      <th>Entregó</th>
+                      <th>Fecha Registro</th>
+                      <th>Estado Firma</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <?php
+
+                    $consultaSQL = "SELECT * FROM entregas ent 
+                        INNER JOIN empresas empr ON empr.id_empresa=ent.empresa
+                        INNER JOIN empleados empl ON empl.id_empleado=ent.empleado
+                        INNER JOIN usuario us ON us.id_usuario=ent.usuario
+                        INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado WHERE ent.estado_entrega=1 ORDER BY empr.nombre_empresa";
+                    $entregas = $conexion->consultarDatos($consultaSQL);
+                    foreach ($entregas as $entrega) :
+                      $datos = $entrega['id_entrega'] . "||" . $entrega['estado_entrega'] . "||";
+
+
+                    ?>
+                      <tr class="text-center">
+                        <td><?php echo ($entrega['id_entrega']); ?></td>
+                        <td><?php echo ($entrega['nombre_empresa']); ?></td>
+                        <td><?php echo ($entrega['nombre_empleado'] . " (" . $entrega['cargo_empleado'] . ")"); ?></td>
+                        <td><?php echo ($entrega['nombre_usuario']); ?></td>
+                        <td><?php echo ($entrega['fecha_ingreso']); ?></td>
+                        <td><?php echo ($entrega['nombre_estado']); ?></td>
+
+                      </tr>
+
+                    <?php
+
+                    endforeach;  ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+           <!-- acordeon de entregas pendientes -->
+           <div class="collapse" id="totalAprobadas">
+            <div class="card">
+              <div class="card-header text-center font-weight-bold p-0">
+                <h1>Entregas Aprobadas</h1>
+              </div>
+              <div class="card-body">
+                <table class="table table-hover table-condensed table-bordered tablaDinamica" id="" width="100%" cellspacing="0">
+                  <thead>
+                    <tr class="text-center">
+                      <th>ID</th>
+                      <th>Empresa</th>
+                      <th>Recibió</th>
+                      <th>Entregó</th>
+                      <th>Fecha Registro</th>
+                      <th>Estado Firma</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <?php
+
+                    $consultaSQL = "SELECT * FROM entregas ent 
+                        INNER JOIN empresas empr ON empr.id_empresa=ent.empresa
+                        INNER JOIN empleados empl ON empl.id_empleado=ent.empleado
+                        INNER JOIN usuario us ON us.id_usuario=ent.usuario
+                        INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado WHERE ent.estado_entrega=2 ORDER BY empr.nombre_empresa";
+                    $entregas = $conexion->consultarDatos($consultaSQL);
+                    foreach ($entregas as $entrega) :
+                      $datos = $entrega['id_entrega'] . "||" . $entrega['estado_entrega'] . "||";
+
+
+                    ?>
+                      <tr class="text-center">
+                        <td><?php echo ($entrega['id_entrega']); ?></td>
+                        <td><?php echo ($entrega['nombre_empresa']); ?></td>
+                        <td><?php echo ($entrega['nombre_empleado'] . " (" . $entrega['cargo_empleado'] . ")"); ?></td>
+                        <td><?php echo ($entrega['nombre_usuario']); ?></td>
+                        <td><?php echo ($entrega['fecha_ingreso']); ?></td>
+                        <td><?php echo ($entrega['nombre_estado']); ?></td>
+
+                      </tr>
+
+                    <?php
+
+                    endforeach;  ?>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
         </div>
         <!-- fin cuerpo de trabajo -->
       </section>
@@ -116,8 +371,8 @@ $usuario = $_SESSION['iduser'];
 </body>
 <script>
   comparativo = '<?php echo $_SESSION['firma'] ?>';
-  rol='<?php echo $_SESSION['idrol'] ?>'
-  if (comparativo == ''&& rol!=1) {
+  rol = '<?php echo $_SESSION['idrol'] ?>'
+  if (comparativo == '' && rol != 1) {
     Swal.fire({
       position: 'center',
       icon: 'info',
@@ -126,7 +381,6 @@ $usuario = $_SESSION['iduser'];
 
     })
   }
-
 </script>
 <script>
   $(function() {
