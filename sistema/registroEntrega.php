@@ -25,7 +25,7 @@ $usuario = $_SESSION['iduser'];
     #signatureparent {
         color: black;
         background-color: darkgrey;
-        max-width:380px;
+        max-width: 380px;
         padding: 10px;
         border-radius: 6px;
     }
@@ -141,22 +141,22 @@ $usuario = $_SESSION['iduser'];
                                 </div>
                             </div>
                             <div class="text-center mx-auto">
-                <center>
+                                <center>
 
-                  <button type="button" class="btn btn-info mb-3" id="clear">Limpiar Firma</button>
-                  <div id="content" class="">
-                    <div id="signatureparent">
-                      <div id="firma"></div>
-                    </div>
-                  </div>
-                </center>
-                <div class="justify-content-center">
-                  <div class="text-center">
+                                    <button type="button" class="btn btn-info mb-3" id="clear">Limpiar Firma</button>
+                                    <div id="content" class="">
+                                        <div id="signatureparent">
+                                            <div id="firma"></div>
+                                        </div>
+                                    </div>
+                                </center>
+                                <div class="justify-content-center">
+                                    <div class="text-center">
 
-                    <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro" >Registrar Entrega</button>
-                  </div>
-                </div>
-              </div>
+                                        <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro">Registrar Entrega</button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -172,8 +172,8 @@ $usuario = $_SESSION['iduser'];
     <?php include "includes/scriptsDown.php" ?>
     <script>
         $(document).ready(function() {
-           
-});
+
+        });
     </script>
     <script>
         $(function() {
@@ -249,17 +249,29 @@ $usuario = $_SESSION['iduser'];
                     contentType: false,
                     dataType: 'json',
                     success: function(data) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            html: '<img src="../img/expertosip-logo.svg">',
-                            title: '<br>Entrega de Satisfacción Registrada Corectamente',
-                            background: ' #000000cd',
-                            showConfirmButton: false,
-                            timer: 2000,
-                        }).then((result) => {
-                            window.location = "";
-                        })
+                        if (data == 1) {
+                            /* envio correo */
+                            $.ajax({
+                                type: "POST",
+                                url: "php/correoEntrega.php",
+                                success: function(data) {
+                                    }
+                            });
+
+                            /* mensaje de registro completado */
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                html: '<img src="../img/expertosip-logo.svg">',
+                                title: '<br>Entrega de Satisfacción Registrada Corectamente',
+                                background: ' #000000cd',
+                                showConfirmButton: false,
+                                timer: 2000,
+                            }).then((result) => {
+                                window.location = "";
+                            })
+                        }
+
                     }
                 });
 
@@ -268,8 +280,6 @@ $usuario = $_SESSION['iduser'];
 
 
         });
-        
-
     </script>
 </body>
 

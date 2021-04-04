@@ -44,7 +44,7 @@ if(!empty($_SESSION['active'])){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Contraseña" id="contraseña" name="contraseña">
+          <input type="password" class="form-control" placeholder="Contrasena" id="pw" name="pw">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -77,6 +77,6 @@ if(!empty($_SESSION['active'])){
 <script src="dist/js/adminlte.min.js"></script>
 <!-- sweetalert2 -->
 <script src="plugins/sweetalert2/sweetalert2.js"></script>
-<script src="scripts.js"></script>
+<script src="scriptss.js"></script>
 </body>
 </html>
