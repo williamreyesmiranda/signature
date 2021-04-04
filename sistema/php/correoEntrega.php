@@ -26,11 +26,13 @@ $cuerpo = "
         <table>
             <tr>
                 <td>Firma:</td>
-                <td></td>
+                <td>".$entrega[0]['firma_empleado']."</td>
             </tr>
         </table> <br>
-        <button type=\"button\" style=\"background-color: #2e3838; color: white; border-radius: 5px;\"><a href=\"\">Confirmar</a></button>
-       <br><br>
+        <center>
+        <button type=\"button\" style=\"background-color: #2e3838; color: white; border-radius: 5px;padding: 10px; width: 300px;\"><a href=\"https://signature.intranetk-misetas.com/confirmarEntrega.php?=id=".$idEntrega."\">Confirmar</a></button>
+        </center>
+         <br><br>
          
         Si presenta alguna incosistencia con esta información, por favor abstenerse de aprobar firma y hacer el reporte. <br>
         </p> 
@@ -46,17 +48,17 @@ $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 $headers .= "From: expertosip.com <noreply@expertosip.com>\r\n";
 
 //dirección de respuesta, si queremos que sea distinta que la del remitente 
-/* $headers .= "Reply-To:" . $entrega[0]['correo_usuario'] . "\r\n"; */
+$headers .= "Reply-To:" . $entrega[0]['correo_usuario'] . "\r\n";
 
 //ruta del mensaje desde origen a destino 
-/* $headers .= "Return-path:" . $entrega[0]['correo_empleado'] . "\r\n"; */
+$headers .= "Return-path:" . $entrega[0]['correo_empleado'] . "\r\n";
 
 //direcciones que recibián copia 
-/* $headers .= "Cc:" . $correoUsuario . "\r\n"; */
+$headers .= "Cc:" . $entrega[0]['correo_usuario'] . "\r\n";
 
 //direcciones que recibirán copia oculta 
 /* $headers .= "Bcc: pepe@pepe.com,juan@juan.com\r\n";  */
-$mail = @mail($destinatario, $asunto, $cuerpo);
+$mail = @mail($destinatario, $asunto, $cuerpo,$headers);
 
 
 echo json_encode($idEntrega);
