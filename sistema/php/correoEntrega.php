@@ -23,14 +23,9 @@ $cuerpo = "
         <h1 style=\" text-transform: uppercase;\">Hola " . $entrega[0]['nombre_empleado'] . "</h1> 
         <p> 
         <b>Se ha reportado una firma en la entrega N°" . $idEntrega . ", Y está esperando por ser aprobada.</b>. <br><br>
-        <table>
-            <tr>
-                <td>Firma:</td>
-                <td>".$entrega[0]['firma_empleado']."</td>
-            </tr>
-        </table> <br>
+        <br>
         <center>
-        <button type=\"button\" style=\"background-color: #2e3838; color: white; border-radius: 5px;padding: 10px; width: 300px;\"><a href=\"https://signature.intranetk-misetas.com/confirmarEntrega.php?=id=".$idEntrega."\">Confirmar</a></button>
+        <button type=\"button\" style=\"background-color: #2e3838; border-radius: 5px;padding: 5px; width: 300px;\"><a style=\"text-transform: none; color: white; font-weight: bold;  font-size: large;\" href=\"https://signature.intranetk-misetas.com/confirmarEntrega.php?id=".$idEntrega."\">CONFIRMAR</a></button>
         </center>
          <br><br>
          
