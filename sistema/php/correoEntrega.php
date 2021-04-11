@@ -19,8 +19,9 @@ $destinatario = $entrega[0]['correo_empleado'];
 $asunto = "Confirmación de Firma para Entrega N°" . $idEntrega;
 $cuerpo = " 
         <html> 
+        <meta charset=\"utf-8\" />
         <body> 
-        <h1 style=\" text-transform: uppercase;\">Hola " . $entrega[0]['nombre_empleado'] . "</h1> 
+        <h1 style=\"text-transform: uppercase;\">Hola " . $entrega[0]['nombre_empleado'] . "</h1> 
         <p> 
         <b>Se ha reportado una firma en la entrega N°" . $idEntrega . ", Y está esperando por ser aprobada.</b>. <br><br>
         <br>
@@ -33,7 +34,7 @@ $cuerpo = "
         </p> 
         </body> 
         </html> 
-        <meta charset=\"utf-8\" />
+        
         ";
 //para el envío en formato HTML 
 $headers = "MIME-Version: 1.0\r\n";
@@ -43,13 +44,13 @@ $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 $headers .= "From: expertosip.com <noreply@expertosip.com>\r\n";
 
 //dirección de respuesta, si queremos que sea distinta que la del remitente 
-$headers .= "Reply-To:" . $entrega[0]['correo_usuario'] . "\r\n";
+//$headers .= "Reply-To:" . $entrega[0]['correo_usuario'] . "\r\n";
 
 //ruta del mensaje desde origen a destino 
-$headers .= "Return-path:" . $entrega[0]['correo_empleado'] . "\r\n";
+//$headers .= "Return-path:" . $entrega[0]['correo_empleado'] . "\r\n";
 
 //direcciones que recibián copia 
-$headers .= "Cc:" . $entrega[0]['correo_usuario'] . "\r\n";
+//$headers .= "Cc:" . $entrega[0]['correo_usuario'] . "\r\n";
 
 //direcciones que recibirán copia oculta 
 /* $headers .= "Bcc: pepe@pepe.com,juan@juan.com\r\n";  */

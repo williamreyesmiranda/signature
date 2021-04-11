@@ -17,7 +17,7 @@ if (empty($_SESSION['active'])) {
 
         </tr>
     </thead>
-   <tbody>
+    <tbody>
 
         <?php include("../../db/Conexion.php");
         $conexion = new Conexion();
@@ -28,9 +28,9 @@ if (empty($_SESSION['active'])) {
                         INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado WHERE ent.estado_entrega<=2";
         $entregas = $conexion->consultarDatos($consultaSQL);
         foreach ($entregas as $entrega) :
-            $datos = $entrega['id_entrega']."||".$entrega['estado_entrega']."||";
+            $datos = $entrega['id_entrega'] . "||" . $entrega['estado_entrega'] . "||";
 
-
+            $firmaEmpleado = $entrega['firma_empleado'];
         ?>
             <tr class="text-center">
                 <td><?php echo ($entrega['id_entrega']); ?></td>
@@ -40,8 +40,8 @@ if (empty($_SESSION['active'])) {
                 <td><?php echo ($entrega['fecha_ingreso']); ?></td>
                 <td><?php echo ($entrega['nombre_estado']); ?></td>
                 <td>
-                    <div class="btn-group" >
-                        <button type="button" class="btn btn-primary" title="Ver Entrega"><a href="reporteEntrega.php?id=<?php echo ($entrega['id_entrega']); ?>" target="_black"><i class="fas fa-eye text-white"></i></a></button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" title="<?php if($firmaEmpleado==""){echo("Editar");}else{echo("Ver");}?> Entrega"><a href="reporteEntrega.php?id=<?php echo ($entrega['id_entrega']); ?>" target="_black"><i class="<?php if($firmaEmpleado==""){echo("fas fa-edit");}else{echo("fas fa-eye");}?> text-white"></i></a></button>
                         <button type="button" class="btn btn-success" title="Finalizar Entrega" onclick="finalizarEntrega('<?php echo ($datos); ?>3')"><i class="fas fa-check-circle"></i></button>
                         <button type="button" class="btn btn-danger" title="Anular Entrega" onclick="finalizarEntrega('<?php echo ($datos); ?>4')"><i class="fas fa-times-circle"></i></button>
                     </div>

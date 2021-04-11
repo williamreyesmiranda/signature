@@ -238,7 +238,7 @@ $usuario = $_SESSION['iduser'];
             $(document).on('submit', '#formIngresoEntrega', function() {
 
                 let formData = new FormData(this);
-
+                formData.append("native", signatureContainer.jSignature("getData", "native"));
                 formData.append("signature", signatureContainer.jSignature("getData", "svg"));
 
                 $.ajax({
@@ -251,12 +251,12 @@ $usuario = $_SESSION['iduser'];
                     success: function(data) {
                         if (data == 1) {
                             /* envio correo */
-                            $.ajax({
+                        /*     $.ajax({
                                 type: "POST",
                                 url: "php/correoEntrega.php",
                                 success: function(data) {
                                     }
-                            });
+                            }); */
 
                             /* mensaje de registro completado */
                             Swal.fire({

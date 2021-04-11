@@ -359,8 +359,8 @@ function finalizarEntrega(datos) {
         Swal.fire({
             position: 'center',
             icon: 'warning',
-            html: 'Comuníquese con el cliente para que apruebe la firma.<br><img src="../img/expertosip-logo.svg">',
-            title: '<br>La Firma no ha sido aprobada!!!',
+            html: '<br><img src="../img/expertosip-logo.svg">',
+            title: '<br>La entrega no ha sido Firmada aún!!!',
         });
     } else {
         if (estadoNuevo == 3) {
@@ -403,4 +403,3 @@ function finalizarEntrega(datos) {
     }
 
 }
-

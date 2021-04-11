@@ -21,6 +21,25 @@ $idEntrega = $_GET['id'];
 
   <?php include "includes/scriptsUp.php" ?>
 </head>
+<style>
+  #signatureparent {
+    color: black;
+    background-color: darkgrey;
+    max-width: 380px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  #firma {
+    border: 2px dotted black;
+    background-color: lightgrey;
+  }
+
+  html.touch #content {
+    float: left;
+    width: 92%;
+  }
+</style>
 <?php
 $consultaSQL = "SELECT * FROM entregas ent 
 INNER JOIN empresas empr ON empr.id_empresa=ent.empresa
@@ -29,6 +48,7 @@ INNER JOIN usuario us ON us.id_usuario=ent.usuario
 INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado
  WHERE ent.id_entrega='$idEntrega'";
 $entrega = $conexion->consultarDatos($consultaSQL);
+$firma_empleado = $entrega[0]['firma_empleado'];
 ?>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -129,7 +149,7 @@ $entrega = $conexion->consultarDatos($consultaSQL);
               <div class="row mt-3">
                 <div class="col-sm-6 text-center ">
                   <div><span><?php echo ($entrega[0]['firma_empleado']) ?></span></div>
-                  <div><?php echo ($entrega[0]['nombre_empleado']) ?></div>
+                  <div><?php echo ($entrega[0]['nombre_empleado'])?><br>(<?php echo ($entrega[0]['cargo_empleado']) ?>)</div>
                 </div>
                 <div class="col-sm-6 text-center">
                   <div><span><?php echo ($entrega[0]['firma_usuario']) ?></span></div>
@@ -147,7 +167,28 @@ $entrega = $conexion->consultarDatos($consultaSQL);
 
 
           </div>
+          <?php if ($firma_empleado == "") : ?>
+            <div class="text-center mx-auto">
+              <center>
 
+                <button type="button" class="btn btn-info mb-3" id="clear">Limpiar Firma</button>
+                <div id="content" class="">
+                  <div id="signatureparent">
+                    <div id="firma"></div>
+                  </div>
+                </div>
+              </center>
+              <div class="justify-content-center">
+                <div class="text-center">
+                  <form action="" id="formIngresoFirma">
+                    <input type="hidden" name="idEntrega"value="<?php echo ($idEntrega) ?>">
+                    <button type="submit" class="btn btn-dark mt-3" name="botonRegistro" id="botonRegistro">Registrar Firma</button>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          <?php endif ?>
 
 
 
@@ -158,14 +199,72 @@ $entrega = $conexion->consultarDatos($consultaSQL);
     <!-- fin contenido-wrapper -->
 
 
-    <!-- Main Footer -->
-    <?php /* include "includes/footer.php"  */ ?>
-
   </div>
   <!-- fin wrapper -->
   <?php include "includes/scriptsDown.php" ?>
   <script>
+  let firma='<?php echo ($firma_empleado) ?>';
+  if(firma!=''){
     window.print();
+  }
+    
+  </script>
+
+  <script>
+    $(function() {
+      let signatureContainer = $('#firma').jSignature();
+
+      $("#clear").click(function() {
+        signatureContainer.jSignature("reset");
+      });
+      $(document).on('submit', '#formIngresoFirma', function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        formData.append("native", signatureContainer.jSignature("getData", "native"));
+        formData.append("signature", signatureContainer.jSignature("getData", "svg"));
+
+        $.ajax({
+          url: "php/ingresarFirma.php",
+          method: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          dataType: 'json',
+          success: function(data) {
+            if (data == 1) {
+            
+              /* mensaje de registro completado */
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                html: '<img src="../img/expertosip-logo.svg">',
+                title: '<br>La firma Se Ha Ingresado Corectamente',
+                background: ' #000000cd',
+                showConfirmButton: false,
+                timer: 2000,
+              }).then((result) => {
+                window.location = "";
+              })
+            }else{
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                html: '<img src="../img/expertosip-logo.svg">',
+                title: '<br>No se ha escrito ninguna firma',
+                background: ' #000000cd',
+                showConfirmButton: false,
+                timer: 2000,
+              })
+            }
+
+          }
+        });
+
+      });
+
+
+
+    });
   </script>
 </body>
 

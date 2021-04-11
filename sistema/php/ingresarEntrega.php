@@ -6,14 +6,21 @@ $conexion = new Conexion();
 $empleado = $_POST['empleado'];
 $empresa = $_POST['empresa'];
 $firma=$_POST['signature'];
+$native = $_POST['native'];
 $usuario = $_SESSION['iduser'];
 $obs = $_POST['obs'];
 $cantidades = $_POST['cantidad'];
 $descripcion = $_POST['descripcion'];
 $marca = $_POST['marca'];
 $serial = $_POST['serial'];
-$consultaSQL = "INSERT INTO entregas (empresa, empleado, usuario, observaciones, firma_empleado) 
-    values ($empresa , $empleado, $usuario, '$obs','$firma')";
+if($native!=""){
+    $consultaSQL = "INSERT INTO entregas (empresa, empleado, usuario, observaciones, firma_empleado, estado_entrega) 
+    values ($empresa , $empleado, $usuario, '$obs','$firma',2)";
+}else{
+    $consultaSQL = "INSERT INTO entregas (empresa, empleado, usuario, observaciones,  estado_entrega) 
+    values ($empresa , $empleado, $usuario, '$obs',1)";
+}
+
 $insert = $conexion->agregarDatos($consultaSQL);
 
 /* Ingreso de productos a la tabla de entrega_productos */
