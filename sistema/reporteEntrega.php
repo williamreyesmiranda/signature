@@ -8,7 +8,17 @@ if (empty($_SESSION['active'])) {
 }
 
 $idEntrega = $_GET['id'];
+$consultaSQL = "SELECT * FROM entregas ent 
+INNER JOIN empresas empr ON empr.id_empresa=ent.empresa
+INNER JOIN empleados empl ON empl.id_empleado=ent.empleado
+INNER JOIN usuario us ON us.id_usuario=ent.usuario
+INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado
+ WHERE ent.id_entrega='$idEntrega'";
+$entrega = $conexion->consultarDatos($consultaSQL);
+$firma_empleado = $entrega[0]['firma_empleado'];
+$nombreEmpleado=$entrega[0]['nombre_empleado'];
 ?>
+
 
 
 <!DOCTYPE html>
@@ -17,7 +27,7 @@ $idEntrega = $_GET['id'];
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrega N°<?php echo ($idEntrega) ?></title>
+  <title>Entrega N°<?php echo ($idEntrega) ?>(<?php echo ($nombreEmpleado)?>)</title>
 
   <?php include "includes/scriptsUp.php" ?>
 </head>
@@ -40,16 +50,7 @@ $idEntrega = $_GET['id'];
     width: 92%;
   }
 </style>
-<?php
-$consultaSQL = "SELECT * FROM entregas ent 
-INNER JOIN empresas empr ON empr.id_empresa=ent.empresa
-INNER JOIN empleados empl ON empl.id_empleado=ent.empleado
-INNER JOIN usuario us ON us.id_usuario=ent.usuario
-INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado
- WHERE ent.id_entrega='$idEntrega'";
-$entrega = $conexion->consultarDatos($consultaSQL);
-$firma_empleado = $entrega[0]['firma_empleado'];
-?>
+
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
