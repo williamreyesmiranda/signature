@@ -1,5 +1,6 @@
 <?php
-
+$sessionTime = 365 * 24 * 60 * 60; // 1 año de duración
+session_set_cookie_params($sessionTime);
 session_start();
 include("Conexion.php");
 
@@ -17,6 +18,7 @@ WHERE us.usuario_sesion= '$user' AND us.clave= '$pass'";
 $data = $conectar->consultarDatos($consultaSQL);
 
 if ($data) {
+    
     $_SESSION['active'] = true;
     $_SESSION['iduser'] = $data[0]['id_usuario'];
     $_SESSION['nombre'] = $data[0]['nombre_usuario'];

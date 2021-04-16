@@ -1,4 +1,6 @@
 <?php
+$sessionTime = 365 * 24 * 60 * 60; // 1 año de duración
+session_set_cookie_params($sessionTime);
 session_start();
 include "../db/Conexion.php";
 $conexion = new Conexion();
