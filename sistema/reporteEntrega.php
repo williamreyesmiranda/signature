@@ -18,7 +18,7 @@ INNER JOIN estado_entrega esen ON ent.estado_entrega=esen.id_estado
  WHERE ent.id_entrega='$idEntrega'";
 $entrega = $conexion->consultarDatos($consultaSQL);
 $firma_empleado = $entrega[0]['firma_empleado'];
-$nombreEmpleado=$entrega[0]['nombre_empleado'];
+$nombreEmpresa=$entrega[0]['nombre_empresa'];
 ?>
 
 
@@ -29,7 +29,7 @@ $nombreEmpleado=$entrega[0]['nombre_empleado'];
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrega N°<?php echo ($idEntrega) ?>(<?php echo ($nombreEmpleado)?>)</title>
+  <title>Entrega N°<?php echo ($idEntrega) ?>(<?php echo ($nombreEmpresa)?>)</title>
 
   <?php include "includes/scriptsUp.php" ?>
 </head>
