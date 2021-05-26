@@ -5,6 +5,10 @@ $(document).ready(function () {
     $('.select2').select2({
         theme: 'bootstrap4'
     });
+    $('.selectUsuario').select2({
+        theme: 'bootstrap4',
+        width: '100%',
+    });
 
 });
 

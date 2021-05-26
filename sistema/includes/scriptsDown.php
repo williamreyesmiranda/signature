@@ -5,7 +5,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         
-        <script src="../assets/js/jSignature.min.js"></script>
+        <script src="../assets/js/jSignature.mins.js"></script>
         <script src="../assets/js/modernizr.js"></script>
   <!-- Bootstrap -->
   <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -45,7 +45,7 @@
   <!-- Select2 -->
   <script src="../plugins/select2/js/select2.full.min.js"></script>
   <script src="../plugins/sweetalert2/sweetalert2.js"></script>
-  <script src="js/scritpss.js"></script>
+  <script src="js/scritps.js"></script>
 
   
 

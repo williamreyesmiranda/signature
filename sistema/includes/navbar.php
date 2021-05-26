@@ -102,7 +102,7 @@
                             $empresas = $conexion->consultarDatos($consultaProcesos);
                             ?>
                             <label for="empresa">Empresa (*):</label>
-                            <select class="form-control" name="empresa" required>
+                            <select class="form-control selectUsuario" name="empresa" required>
                                 <option value="" selected disabled>Seleccione Una Empresa</option>
                                 <?php foreach ($empresas as $empresa) : ?>
                                     <option value="<?php echo ($empresa['id_empresa']) ?>"><?php echo ($empresa['nombre_empresa']) ?></option>

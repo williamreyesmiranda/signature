@@ -37,7 +37,7 @@ $nombreEmpresa=$entrega[0]['nombre_empresa'];
   #signatureparent {
     color: black;
     background-color: darkgrey;
-    max-width: 380px;
+    /* max-width: 380px; */
     padding: 10px;
     border-radius: 6px;
   }
@@ -151,7 +151,8 @@ $nombreEmpresa=$entrega[0]['nombre_empresa'];
               </div>
               <div class="row mt-3">
                 <div class="col-sm-6 text-center ">
-                  <div><span><?php echo ($entrega[0]['firma_empleado']) ?></span></div>
+                <img src=´<?php echo ($entrega[0]["firma_empleado"])?>´ >
+                  <div><span></span></div>
                   <div><?php echo ($entrega[0]['nombre_empleado'])?><br>(<?php echo ($entrega[0]['cargo_empleado']) ?>)</div>
                 </div>
                 <div class="col-sm-6 text-center">
@@ -215,7 +216,9 @@ $nombreEmpresa=$entrega[0]['nombre_empresa'];
 
   <script>
     $(function() {
-      let signatureContainer = $('#firma').jSignature();
+      let signatureContainer = $('#firma').jSignature({
+            'UndoButton': true
+        });
 
       $("#clear").click(function() {
         signatureContainer.jSignature("reset");

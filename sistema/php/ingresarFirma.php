@@ -9,7 +9,7 @@ $native = $_POST['native'];
 
 if($native!=""){
     $consultaSQL = "UPDATE entregas SET firma_empleado='$firma', estado_entrega=2 WHERE id_entrega=$idEntrega;
-    UPDATE entregas SET firma_empleado=REPLACE(firma_empleado,'image/svg+xml,','')";
+     UPDATE entregas SET firma_empleado=REPLACE(firma_empleado,'\'','\"')";
     $insert = $conexion->editarDatos($consultaSQL);
 
 }else{
